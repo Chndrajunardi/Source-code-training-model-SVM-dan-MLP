@@ -128,6 +128,6 @@ pip install numpy pandas scikit-learn tensorflow matplotlib joblib
 
 Source code ini merupakan bagian dari penelitian skripsi dengan judul:
 
-**"Klasifikasi Subtipe Molekuler Kanker Payudara Berdasarkan Ekspresi Gen TCGA-BRCA Menggunakan Machine Learning."**
+**"Dashboard Klasifikasi Subtipe Molekuler Kanker Payudara Berdasarkan Ekspresi Gen TCGA-BRCA Menggunakan Machine Learning."**
 
 Seluruh proses pemodelan dan hasil evaluasi ditujukan untuk kepentingan penelitian akademik, bukan sebagai alat diagnosis klinis.
