@@ -1,85 +1,82 @@
 # Source Code Training Model SVM dan MLP
 
 ## Deskripsi
-Folder ini berisi source code yang digunakan dalam proses pengembangan, pelatihan, optimasi, dan evaluasi model Machine Learning untuk klasifikasi subtipe molekuler kanker payudara berdasarkan data ekspresi gen TCGA-BRCA.
 
-Penelitian ini menggunakan dua algoritma klasifikasi utama, yaitu **Support Vector Machine (SVM)** dan **Multi-Layer Perceptron (MLP)**, dengan label klasifikasi berdasarkan sistem subtipe molekuler PAM50.
+Repositori ini berisi source code penelitian mengenai klasifikasi subtipe molekuler kanker payudara berdasarkan data ekspresi gen TCGA-BRCA menggunakan pendekatan Machine Learning.
 
-## Tujuan
-Source code ini digunakan untuk:
-- Melakukan preprocessing dan seleksi fitur data ekspresi gen.
-- Membangun dan melatih model klasifikasi SVM dan MLP.
-- Melakukan optimasi hyperparameter model.
-- Mengevaluasi performa model menggunakan metrik klasifikasi.
-- Melakukan interpretasi fitur gen berdasarkan model yang dikembangkan.
-- Menyimpan model dan artefak preprocessing untuk kebutuhan implementasi lebih lanjut.
+Penelitian ini mengembangkan dan membandingkan dua algoritma klasifikasi, yaitu **Support Vector Machine (SVM)** dan **Multi-Layer Perceptron (MLP)**, dengan menggunakan sistem klasifikasi subtipe molekuler PAM50.
 
-## Struktur Source Code
+## Struktur Repositori
 
 ```text
 Source-code-training-model-SVM-dan-MLP/
 │
-├── SVM/
-│   └── Source code training dan evaluasi model SVM
+├── Dataset/
+│   └── Dataset yang digunakan dalam penelitian
 │
-├── MLP/
-│   └── Source code training dan evaluasi model MLP
+├── new.ipynb
+│   └── Notebook preprocessing, pelatihan,
+│       optimasi, dan evaluasi model
 │
 └── README.md
+    └── Dokumentasi repositori
 ```
 
-*Catatan: Struktur direktori dapat disesuaikan dengan susunan file aktual.*
-
 ## Dataset
-Dataset yang digunakan berasal dari **The Cancer Genome Atlas (TCGA-BRCA)** melalui UCSC Xena.
 
-Data terdiri atas:
+Dataset penelitian diperoleh dari **The Cancer Genome Atlas (TCGA-BRCA)** melalui UCSC Xena.
+
+Dataset mencakup:
 - Data ekspresi gen kanker payudara.
-- Data klinis untuk memperoleh informasi subtipe molekuler PAM50.
+- Data klinis pasien untuk memperoleh informasi subtipe molekuler PAM50.
 
-Lima kelas klasifikasi yang digunakan:
+Penelitian menggunakan lima kelas subtipe molekuler PAM50:
 1. Basal-like
 2. HER2-enriched
 3. Luminal A
 4. Luminal B
 5. Normal-like
 
-Dataset akhir penelitian terdiri atas 844 sampel setelah proses integrasi, penyaringan, dan seleksi berdasarkan ketersediaan label PAM50.
+Dataset akhir penelitian terdiri atas 844 sampel setelah proses integrasi dan seleksi data.
 
-## Tahapan Pemodelan
+## Metode Penelitian
 
 ### 1. Preprocessing Data
 - Integrasi data ekspresi gen dan data klinis.
-- Seleksi sampel berdasarkan jenis jaringan dan ketersediaan label PAM50.
-- Penanganan data yang tidak valid.
-- Pembagian dataset menjadi data latih dan data uji dengan proporsi 80:20.
-- Seleksi 2.000 gen berdasarkan variansi tertinggi.
-- Standardisasi fitur menggunakan StandardScaler.
+- Seleksi sampel berdasarkan jenis jaringan.
+- Seleksi sampel dengan label PAM50 yang valid.
+- Pembagian data latih dan data uji.
+- Seleksi fitur berdasarkan variansi gen.
+- Standardisasi data ekspresi gen.
 
-### 2. Pelatihan Model SVM
-Model Support Vector Machine dikembangkan menggunakan pendekatan klasifikasi multikelas dengan kernel linear.
+### 2. Support Vector Machine (SVM)
 
-Tahapan yang dilakukan:
+Model SVM digunakan untuk melakukan klasifikasi multikelas berdasarkan pola ekspresi gen.
+
+Tahapan pengembangan meliputi:
 - Pelatihan model awal.
 - Optimasi hyperparameter.
-- Evaluasi menggunakan Stratified K-Fold Cross-Validation.
-- Evaluasi menggunakan Nested Cross-Validation.
-- Pengujian pada data uji.
-- Analisis kepentingan gen berdasarkan nilai absolut koefisien model.
-
-### 3. Pelatihan Model MLP
-Model Multi-Layer Perceptron dikembangkan menggunakan arsitektur jaringan saraf tiruan untuk klasifikasi lima subtipe PAM50.
-
-Tahapan yang dilakukan:
-- Penyusunan arsitektur jaringan saraf.
-- Pelatihan model menggunakan data latih.
-- Validasi selama proses pelatihan.
-- Optimasi parameter pelatihan.
+- Stratified K-Fold Cross-Validation.
+- Nested Cross-Validation.
 - Evaluasi menggunakan data uji.
-- Penyimpanan model dalam format `.keras`.
+- Interpretasi kepentingan gen berdasarkan nilai absolut koefisien model.
 
-### 4. Evaluasi Model
-Evaluasi performa model dilakukan menggunakan metrik:
+### 3. Multi-Layer Perceptron (MLP)
+
+Model MLP dikembangkan menggunakan jaringan saraf tiruan untuk mengklasifikasikan lima subtipe molekuler PAM50.
+
+Tahapan pengembangan meliputi:
+- Perancangan arsitektur jaringan.
+- Pelatihan model.
+- Validasi model.
+- Optimasi parameter pelatihan.
+- Evaluasi performa model.
+- Penyimpanan model terlatih.
+
+## Evaluasi Model
+
+Kinerja model dievaluasi menggunakan beberapa metrik klasifikasi:
+
 - Accuracy
 - Balanced Accuracy
 - Macro Precision
@@ -89,38 +86,48 @@ Evaluasi performa model dilakukan menggunakan metrik:
 - Matthews Correlation Coefficient (MCC)
 
 ## Teknologi dan Library
-Source code dikembangkan menggunakan Python dengan beberapa library berikut:
+
+Penelitian ini menggunakan beberapa teknologi dan library berikut:
 
 - Python
+- Jupyter Notebook
 - NumPy
 - Pandas
 - Scikit-learn
 - TensorFlow / Keras
 - Matplotlib
 - Joblib
-- XGBoost (jika digunakan pada eksperimen pembanding)
 
-## Artefak Model
-Model dan komponen preprocessing yang telah dilatih disimpan untuk kebutuhan penggunaan kembali.
+## Cara Menjalankan Source Code
 
-Artefak model MLP meliputi:
-- `tuned_mlp_final.keras` — model MLP hasil pelatihan.
-- `standard_scaler.joblib` — objek standardisasi fitur.
-- `selected_gene_names.json` — daftar gen terpilih beserta urutannya.
-- `label_mapping.json` — pemetaan label kelas.
+1. Clone repositori GitHub:
 
-Artefak model SVM disimpan sesuai dengan format serialisasi yang digunakan pada proses pelatihan.
+```bash
+git clone <URL-REPOSITORY>
+```
 
-## Catatan Penggunaan
-1. Pastikan Python dan seluruh library yang dibutuhkan telah terpasang.
-2. Sesuaikan lokasi dataset dengan direktori penyimpanan pada source code.
-3. Jalankan source code sesuai urutan preprocessing, pelatihan, dan evaluasi.
-4. Pastikan urutan fitur gen pada data pengujian sama dengan urutan fitur saat pelatihan.
-5. Gunakan objek scaler dan pemetaan label yang sama dengan proses pelatihan ketika melakukan prediksi menggunakan model tersimpan.
+2. Masuk ke direktori repositori:
 
-## Keterangan
-Source code ini merupakan bagian dari penelitian skripsi berjudul:
+```bash
+cd Source-code-training-model-SVM-dan-MLP
+```
 
-**"Dashboard Klasifikasi Subtipe Molekuler Kanker Payudara Berdasarkan Ekspresi Gen TCGA-BRCA Menggunakan Machine Learning."**
+3. Instal library yang diperlukan:
 
-Seluruh hasil pemodelan digunakan untuk kepentingan penelitian akademik dan bukan sebagai alat diagnosis klinis.
+```bash
+pip install numpy pandas scikit-learn tensorflow matplotlib joblib
+```
+
+4. Buka notebook `new.ipynb` menggunakan Jupyter Notebook atau Visual Studio Code.
+
+5. Sesuaikan lokasi dataset apabila diperlukan.
+
+6. Jalankan setiap cell secara berurutan sesuai tahapan penelitian.
+
+## Keterangan Penelitian
+
+Source code ini merupakan bagian dari penelitian skripsi dengan judul:
+
+**"Klasifikasi Subtipe Molekuler Kanker Payudara Berdasarkan Ekspresi Gen TCGA-BRCA Menggunakan Machine Learning."**
+
+Seluruh proses pemodelan dan hasil evaluasi ditujukan untuk kepentingan penelitian akademik, bukan sebagai alat diagnosis klinis.
